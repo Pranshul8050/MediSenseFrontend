@@ -94,7 +94,31 @@ Pranshul Kumar Gera
 📧 pranshulgera0508@gmail.com
 
 
----
+---📌 Project Summary – MediSense
+
+MediSense is a smart healthcare assistant that helps users identify medicines, track symptoms, and interact with an AI-powered chatbot for health-related queries.
+
+🧠 AI Integration – Uses Google Gemini to answer medicine-related questions in natural language.
+
+💊 Medicine Management – Add, view, and manage medicines with details like dosage and frequency.
+
+🤒 Symptom Tracking – Log symptoms with severity, date, and time for better health monitoring.
+
+💬 Message Board – Simple communication feature to store notes/messages.
+
+📸 Medicine Scanning – Upload an image of a medicine to get AI-driven identification (via backend).
+
+☁️ Fully Deployed –
+
+Backend on Render (Node.js + Express + Firebase Firestore).
+
+Frontend on Vercel (React + TypeScript + Tailwind CSS).
+
+🔗 Live Links:
+
+Backend: https://medisensebackend.onrender.com
+
+Frontend: https://medisensefrontend.vercel.app
 
 ✨ Now you’ll have **two professional READMEs** — one in each repo.  
 Do you want me to also **create an `example .env` file** (`.env.example`) for both repos so contributors know what to fill in?
