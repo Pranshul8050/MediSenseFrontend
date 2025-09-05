@@ -1,8 +1,7 @@
 import axios from "axios";
 
-// 👇 Your backend runs on localhost:8080
 const API = axios.create({
-  baseURL: "https://medisensebackend.onrender.com", // now points to root
+  baseURL: import.meta.env.VITE_API_BASE || "http://localhost:8080", 
   withCredentials: false,
 });
 
@@ -34,14 +33,12 @@ export const addSymptom = (data: { description: string; severity: string; date: 
   API.post("/api/firestore/add-symptom", data);
 
 export const getSymptoms = () => API.get("/api/firestore/all-symptoms");
+
 // ======================
 // ✅ AI API
 // ======================
 export const askAI = (question: string) =>
   API.post("/api/ai/ask", { question });
 
-
-// ======================
-// ✅ Default Export
-// ======================
 export default API;
+
