@@ -13,9 +13,13 @@ const MedicineScanner: React.FC = () => {
       const formData = new FormData();
       formData.append("image", file);
 
-      const res = await axios.post("http://localhost:8080/api/ai/scan", formData, {
-        headers: { "Content-Type": "multipart/form-data" },
-      });
+      const res = await axios.post(
+        `${import.meta.env.VITE_API_BASE}/api/ai/scan`,
+        formData,
+        {
+          headers: { "Content-Type": "multipart/form-data" },
+        }
+      );
 
       setResult(res.data.answer);
     } catch (err) {
@@ -46,44 +50,58 @@ const MedicineScanner: React.FC = () => {
       </button>
 
       {result && (
-  <div className="mt-6 bg-white p-6 rounded-xl shadow-md border border-gray-200">
-    <h2 className="text-lg font-bold mb-4 text-indigo-700">Scan Result</h2>
+        <div className="mt-6 bg-white p-6 rounded-xl shadow-md border border-gray-200">
+          <h2 className="text-lg font-bold mb-4 text-indigo-700">Scan Result</h2>
 
-    {/* Parse structured response */}
-    <div className="space-y-3 text-gray-700">
-      {result.includes("Medicine Name:") && (
-        <p>
-          <span className="font-semibold">💊 Medicine Name: </span>
-          {result.split("Medicine Name:**")[1]?.split("**Usage:")[0]?.trim().replace(/\*/g, "")}
-        </p>
+          <div className="space-y-3 text-gray-700">
+            {result.includes("Medicine Name:") && (
+              <p>
+                <span className="font-semibold">💊 Medicine Name: </span>
+                {result
+                  .split("Medicine Name:**")[1]
+                  ?.split("**Usage:")[0]
+                  ?.trim()
+                  .replace(/\*/g, "")}
+              </p>
+            )}
+
+            {result.includes("Usage:") && (
+              <p>
+                <span className="font-semibold">📌 Usage: </span>
+                {result
+                  .split("Usage:**")[1]
+                  ?.split("**Side Effects:")[0]
+                  ?.trim()
+                  .replace(/\*/g, "")}
+              </p>
+            )}
+
+            {result.includes("Side Effects:") && (
+              <p>
+                <span className="font-semibold">⚠️ Side Effects: </span>
+                {result
+                  .split("Side Effects:**")[1]
+                  ?.split("**Precautions:")[0]
+                  ?.trim()
+                  .replace(/\*/g, "")}
+              </p>
+            )}
+
+            {result.includes("Precautions:") && (
+              <p>
+                <span className="font-semibold">🔒 Precautions: </span>
+                {result
+                  .split("Precautions:**")[1]
+                  ?.trim()
+                  .replace(/\*/g, "")}
+              </p>
+            )}
+          </div>
+        </div>
       )}
-
-      {result.includes("Usage:") && (
-        <p>
-          <span className="font-semibold">📌 Usage: </span>
-          {result.split("Usage:**")[1]?.split("**Side Effects:")[0]?.trim().replace(/\*/g, "")}
-        </p>
-      )}
-
-      {result.includes("Side Effects:") && (
-        <p>
-          <span className="font-semibold">⚠️ Side Effects: </span>
-          {result.split("Side Effects:**")[1]?.split("**Precautions:")[0]?.trim().replace(/\*/g, "")}
-        </p>
-      )}
-
-      {result.includes("Precautions:") && (
-        <p>
-          <span className="font-semibold">🔒 Precautions: </span>
-          {result.split("Precautions:**")[1]?.trim().replace(/\*/g, "")}
-        </p>
-      )}
-    </div>
-  </div>
-)}
-
     </div>
   );
 };
 
 export default MedicineScanner;
+
