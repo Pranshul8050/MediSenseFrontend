@@ -5,6 +5,12 @@ const API = axios.create({
   withCredentials: false,
 });
 
+export const scanMedicine = (formData: FormData) =>
+  API.post("/api/ai/scan", formData, {
+    headers: { 'Content-Type': 'multipart/form-data' },
+  });
+
+
 // =====================
 // ✅ Healthcheck API
 // =====================
